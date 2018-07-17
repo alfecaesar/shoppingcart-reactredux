@@ -22,3 +22,17 @@
 .padding-bot-s{
     padding-bottom: 10px;
 }
+.field-margin-bot{
+    margin-bottom: 20px;
+}
+.backtohome a{
+    display: inline-block;
+    margin: 0 10px;
+}
+.cartsummary button{
+    display: inline-block;
+    margin: 0 0 0 10px;
+}
+.grandTotalTxt{
+    font-size: 17px;
+}

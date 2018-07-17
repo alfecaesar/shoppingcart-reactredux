@@ -4,6 +4,7 @@ import { Navbar, Grid } from 'react-bootstrap';
 import ProductList from './components/ProductList';
 import CartSummary from './components/CartSummary';
 import ViewCart from './components/ViewCart';
+import Checkout from './components/Checkout';
 
 import {
   BrowserRouter as Router,
@@ -45,6 +46,26 @@ export const PRODUCTS = [
 
 class App extends Component {
     
+  constructor(props){
+      super(props);
+      this.state = {
+        shoppingCartCount : 0
+      }
+  } 
+    
+  incrementCount = () => {
+        this.setState({ 
+          shoppingCartCount: this.state.shoppingCartCount + 1 
+        })
+        
+  }
+    
+  decrementCount = () => {
+      this.setState({ 
+          shoppingCartCount: this.shoppingCartCount - 1 
+      })
+  }
+    
   render() {
     return (
         <div>
@@ -57,20 +78,24 @@ class App extends Component {
               </Navbar.Header>
               <Navbar.Collapse>
                 <Navbar.Text>
-                  Author: <Navbar.Link href="https://alfecaesar.com">Alfe Caesar Lagas</Navbar.Link>
+                  Author: <Navbar.Link target="_blank" href="https://alfecaesar.com">Alfe Caesar Lagas</Navbar.Link>
                 </Navbar.Text>
                 <Navbar.Text pullRight>A React-Redux Project</Navbar.Text>
               </Navbar.Collapse>
             </Navbar>
         
             <Grid>
-                <CartSummary carts={SHOPPINGCART} />
+                <CartSummary carts={SHOPPINGCART} shoppingCartCount={this.state.shoppingCartCount} />
             </Grid>
             
 
             <Switch>
-                <Route exact path="/" component={ProductList} />
-                <Route path="/view-cart" component={ViewCart} />
+        
+                <Route exact path="/" render={() => <ProductList addCount={this.incrementCount}  minusCount={this.decrementCount}/>} />
+           
+                <Route path="/view-cart" component={ViewCart}  />
+        
+                <Route path="/checkout" component={Checkout} />
             </Switch>
         </div>
     );

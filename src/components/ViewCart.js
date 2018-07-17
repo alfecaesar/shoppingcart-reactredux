@@ -18,7 +18,7 @@ class ViewCart extends Component {
       
     SHOPPINGCART.forEach((scItem) => {
         PRODUCTS.forEach((product) => {
-            if(scItem == product.id){ 
+            if(scItem === product.id){ 
                 
                 totalAmountArr.push(parseInt(product.price));
                 
@@ -60,20 +60,24 @@ class ViewCart extends Component {
             {rows}
         
             <Row className="show-grid row-border-top row-border-top">
-                <Col xs={12} className="text-right">
+                <Col xs={12} className="text-right grandTotalTxt">
                     <strong>Grand Total</strong>
                 </Col>
             </Row>
         
             <Row className="show-grid row-border-bottom">
-                <Col xs={12} className="text-right">
+                <Col xs={12} className="text-right grandTotalTxt">
                     <strong>{this.totalAmount.toLocaleString(navigator.language, { minimumFractionDigits: 2 })}</strong>
                 </Col>
             </Row>
         
             <Row className="show-grid text-center backtohome">
                 <Col xs={12} >
-                    <Link to={{ pathname: '/' }}><Button bsStyle="info">Back to Home</Button></Link>
+                    <Link to={{ pathname: '/' }}><Button>Back to Home</Button></Link>
+                        
+                    <Button bsStyle="danger">Clear Cart</Button>
+                        
+                    <Link to={{ pathname: '/checkout' }}><Button bsStyle="success">Checkout</Button></Link>
                 </Col>
             </Row>
         </Grid>

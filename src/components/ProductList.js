@@ -14,13 +14,15 @@ class ProductList extends Component {
       }
   } 
     
-  addCartClick(a,b) {
-    if(SHOPPINGCART.indexOf(a) == -1){
+  addCartClick(a,b) { 
+    if(SHOPPINGCART.indexOf(a) === -1){
         SHOPPINGCART.push(a);
         //alert(SHOPPINGCART.length);
         this.setState({
             count : SHOPPINGCART.length
         });
+        this.props.addCount()
+        
     }
   }
     
@@ -31,14 +33,14 @@ class ProductList extends Component {
         rows.push(
             <Row className="show-grid productlist">
                 <Col xs={12} md={2}>
-                    <img src={product.photo} />
+                    <img src={product.photo} alt={product.name} />
                 </Col>
                 <Col xs={12} md={10}>
                     <h3>{product.name}</h3>
                     <h5>ID: {product.id}</h5>
                     <h5><strong>PRICE: {product.price.toLocaleString(navigator.language, { minimumFractionDigits: 2 })}</strong></h5>
                     <p>{product.description}</p>
-                    <p class="text-right"><Button bsStyle="primary" onClick={this.addCartClick.bind(this, product.id)} ><Glyphicon glyph="shopping-cart" /> Add To Cart</Button></p>
+                    <p className="text-right"><Button bsStyle="primary" onClick={this.addCartClick.bind(this, product.id)} ><Glyphicon glyph="shopping-cart" /> Add To Cart</Button></p>
                     
                 </Col>
             </Row>
