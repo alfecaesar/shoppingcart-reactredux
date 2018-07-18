@@ -6,6 +6,7 @@ import CartSummary from './components/CartSummary';
 import ViewCart from './components/ViewCart';
 import Checkout from './components/Checkout';
 
+
 import {
   BrowserRouter as Router,
   Link,
@@ -49,7 +50,8 @@ class App extends Component {
   constructor(props){
       super(props);
       this.state = {
-        shoppingCartCount : 0
+        shoppingCartCount : 0,
+        SHOPPINGCART : []
       }
   } 
     
@@ -60,11 +62,15 @@ class App extends Component {
         
   }
     
-  decrementCount = () => {
+  clearCount = () => {
       this.setState({ 
-          shoppingCartCount: this.shoppingCartCount - 1 
+          shoppingCartCount: 0,
+          SHOPPINGCART: []
       })
   }
+  
+  
+  
     
   render() {
     return (
@@ -72,7 +78,7 @@ class App extends Component {
             <Navbar>
               <Navbar.Header>
                 <Navbar.Brand>
-                  <a href="/">My Shopping Cart</a>
+                  <Link to={{ pathname: '/' }}>My Shopping Cart</Link>
                 </Navbar.Brand>
                 <Navbar.Toggle />
               </Navbar.Header>
@@ -85,17 +91,19 @@ class App extends Component {
             </Navbar>
         
             <Grid>
-                <CartSummary carts={SHOPPINGCART} shoppingCartCount={this.state.shoppingCartCount} />
+                <CartSummary carts={this.state.SHOPPINGCART} shoppingCartCount={this.state.shoppingCartCount} />
             </Grid>
             
 
             <Switch>
+                
+                    <Route exact path="/" render={() => <ProductList shoppingCart={this.state.SHOPPINGCART} addCount={this.incrementCount}  minusCount={this.decrementCount}/>} />
         
-                <Route exact path="/" render={() => <ProductList addCount={this.incrementCount}  minusCount={this.decrementCount}/>} />
-           
-                <Route path="/view-cart" component={ViewCart}  />
+                    <Route path="/view-cart" render={() => <ViewCart clearCount={this.clearCount} shoppingCart={this.state.SHOPPINGCART} />} />
         
-                <Route path="/checkout" component={Checkout} />
+                    <Route path="/checkout" component={Checkout} />
+                
+                
             </Switch>
         </div>
     );
