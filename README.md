@@ -7,6 +7,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Demo
 
+[Live App Demo](https://shoppingcart-reactredux.herokuapp.com/)
+
 ![home screenshot](http://alfecaesar.com/extras/screenshot/shop_home.png)
 
 ![shopping cart screenshot](http://alfecaesar.com/extras/screenshot/shop_cart.png)
